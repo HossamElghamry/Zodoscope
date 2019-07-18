@@ -42,9 +42,11 @@ class _MainMenuState extends State<MainMenu> {
                   controller: viewController,
                   curve: Curves.decelerate,
                   onIndexChanged: (index) => {
-                        setState(() {
-                          currentSign = signs[index].name;
-                        })
+                        setState(
+                          () {
+                            currentSign = signs[index].name;
+                          },
+                        )
                       },
                   itemBuilder: (BuildContext context, int index) {
                     return HoroscopeCard(

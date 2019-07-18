@@ -2,31 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:horoscopes/src/ui/main_menu/main_menu.dart';
 
 void main() {
-  runApp(MedicineReminder());
+  runApp(Zodoscope());
 }
 
-class MedicineReminder extends StatefulWidget {
+class Zodoscope extends StatefulWidget {
   @override
-  _MedicineReminderState createState() => _MedicineReminderState();
+  _ZodoscopeState createState() => _ZodoscopeState();
 }
 
-class _MedicineReminderState extends State<MedicineReminder> {
-  //GlobalBloc globalBloc;
-
-  void initState() {
-    //globalBloc = GlobalBloc();
-    super.initState();
-  }
-
+class _ZodoscopeState extends State<Zodoscope> {
   @override
   Widget build(BuildContext context) {
-    return
-        // Provider<GlobalBloc>.value(
-        //   value: globalBloc,
-        //   child:
-        MaterialApp(
+    return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.green,
         brightness: Brightness.light,
         fontFamily: 'Augustus',
       ),
