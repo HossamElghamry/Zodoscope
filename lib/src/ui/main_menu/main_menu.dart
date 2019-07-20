@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:horoscopes/src/common/signs.dart';
 import 'package:horoscopes/src/ui/details/details.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class MainMenu extends StatefulWidget {
   @override
@@ -42,12 +42,12 @@ class _MainMenuState extends State<MainMenu> {
                   controller: viewController,
                   curve: Curves.decelerate,
                   onIndexChanged: (index) => {
-                        setState(
-                          () {
-                            currentSign = signs[index].name;
-                          },
-                        )
+                    setState(
+                      () {
+                        currentSign = signs[index].name;
                       },
+                    )
+                  },
                   itemBuilder: (BuildContext context, int index) {
                     return HoroscopeCard(
                       sign: signs[index],
@@ -88,8 +88,8 @@ class HoroscopeCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => DetailPage(
-                  sign: sign,
-                ),
+              sign: sign,
+            ),
           ),
         );
       },

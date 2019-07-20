@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:horoscopes/src/common/signs.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+import 'package:connectivity/connectivity.dart';
 
 class DetailPage extends StatefulWidget {
   final ZodiacSign sign;
@@ -15,6 +19,41 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   final List<String> timeSpans = ["Today", "Week", "Month", "Year"];
   String selectedSpan = "Today";
 
+  Future<List<String>> getData() async {
+    List<String> info = ["", ""];
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      info[0] = "Please Check your Internet Connection and Try Again.";
+      return info;
+    }
+    var url = Uri.parse(
+        "http://horoscope-api.herokuapp.com/horoscope/${selectedSpan.toLowerCase()}/${widget.sign.name}");
+    http.Response response = await http.get(
+      url,
+      headers: {
+        "Accept": "application/json",
+      },
+    );
+    Map<String, dynamic> data = json.decode(response.body);
+    switch (selectedSpan) {
+      case "Today":
+        info[0] = data["date"];
+        break;
+      case "Week":
+        info[0] = data["week"];
+        break;
+      case "Month":
+        info[0] = data["month"];
+        break;
+      case "Year":
+        info[0] = data["year"];
+        break;
+      default:
+    }
+    info[1] = data["horoscope"];
+    return info;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -22,6 +61,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
+
+    getData();
   }
 
   @override
@@ -29,7 +70,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Color(0xFF151846),
       body: Container(
-        child: Stack(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Hero(
               tag: widget.sign.name,
@@ -54,6 +96,57 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 ),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 20.0),
+              child: FutureBuilder<List<String>>(
+                future: getData(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 75.0),
+                        child: CircularProgressIndicator(
+                          backgroundColor: widget.sign.signColor,
+                        ),
+                      ),
+                    );
+                  }
+                  return Text(
+                    snapshot.data[0],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: EdgeInsets.only(top: 8.0),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(25),
+                    child: FutureBuilder<List<String>>(
+                      future: getData(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Container();
+                        }
+                        return Text(
+                          snapshot.data[1],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -80,12 +173,14 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 child: Text(
                   timeSpans[index],
                   style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
-                  selectedSpan = timeSpans[index];
+                  setState(() {
+                    selectedSpan = timeSpans[index];
+                  });
                   if (_controller.isDismissed) {
                     _controller.forward();
                   } else {
@@ -109,9 +204,9 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     child: Text(
                       selectedSpan,
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                      ),
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     ),
                   );
                 },
