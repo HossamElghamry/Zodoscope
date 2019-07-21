@@ -11,7 +11,7 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenuState extends State<MainMenu> {
   SwiperController viewController = SwiperController();
-  String currentSign = "Aquarius";
+  ZodiacSign currentSign = signs[0];
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _MainMenuState extends State<MainMenu> {
                   onIndexChanged: (index) => {
                     setState(
                       () {
-                        currentSign = signs[index].name;
+                        currentSign = signs[index];
                       },
                     )
                   },
@@ -61,13 +61,24 @@ class _MainMenuState extends State<MainMenu> {
               ),
             ),
             Text(
-              currentSign,
+              currentSign.getName,
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 26,
-                fontFamily: 'Augustus',
-              ),
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontFamily: 'Augustus',
+                  fontWeight: FontWeight.w800),
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: Text(
+                currentSign.getSpan ?? "213",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontFamily: 'Augustus',
+                ),
+              ),
+            )
           ],
         ),
       ),

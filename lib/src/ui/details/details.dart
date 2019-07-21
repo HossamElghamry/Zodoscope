@@ -75,23 +75,28 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
           children: <Widget>[
             Hero(
               tag: widget.sign.name,
-              child: Container(
-                height: 250,
-                decoration: BoxDecoration(
-                  color: widget.sign.signColor,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft:
-                        Radius.circular(MediaQuery.of(context).size.width / 2),
-                    bottomRight:
-                        Radius.circular(MediaQuery.of(context).size.width / 2),
+              child: GestureDetector(
+                onPanDown: (details) {
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                  height: 250,
+                  decoration: BoxDecoration(
+                    color: widget.sign.signColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(
+                          MediaQuery.of(context).size.width / 2),
+                      bottomRight: Radius.circular(
+                          MediaQuery.of(context).size.width / 2),
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Image.asset(
-                    widget.sign.logoPath,
-                    width: 200,
-                    height: 200,
-                    color: Colors.white,
+                  child: Center(
+                    child: Image.asset(
+                      widget.sign.logoPath,
+                      width: 200,
+                      height: 200,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -116,7 +121,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 24,
+                      fontSize: 26,
                       fontWeight: FontWeight.bold,
                     ),
                   );
@@ -138,8 +143,11 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                         }
                         return Text(
                           snapshot.data[1],
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         );
                       },
                     ),
