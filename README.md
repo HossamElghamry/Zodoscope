@@ -4,7 +4,7 @@
   <strong>A Horoscope Forcasting Application</strong>
 </div>
 <div align="center">
-  Built with Flutter
+  Built with Flutter, for Android and iOS
 </div>
 
 API used: http://horoscope-api.herokuapp.com/
