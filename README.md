@@ -1,16 +1,43 @@
-# horoscopes
+<h1 align="center">Zodoscope</h1>
 
-A new Flutter project.
+<div align="center">
+  <strong>A Horoscope Forcasting Application</strong>
+</div>
+<div align="center">
+  Built with Flutter
+</div>
 
-## Getting Started
+API used: http://horoscope-api.herokuapp.com/
 
-This project is a starting point for a Flutter application.
+## Key Features
+* __All Zodiac Signs Horoscopes__ 
+  * Information about every zodiac sign's horoscope with signs
+  * Beautiful slider animation with consistent zodiac icons
+  * Sign hero animation between page transitions
+* __API Reading and JSON Manipulation__ 
+  * Using HTTP requests to take data from the mentioned API
+  * Parsing JSON strings into actual string, displayable format
+* __Daily, Weekly, Monthly and Yearly Forcasting__
+  * Interval can be change by tapping the FAB
+  * Fluid interval preview animation
+* __Network Connectivity Check__ 
+  * Stream listening to connectivity status
+  * Error report upon internet connection issues or data retrieval 
 
-A few resources to get you started if this is your first Flutter project:
+PS: To navigate from the details screen back to the homescreen, simply swipe the sign down.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+# Screenshots
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div align="center">
+  <pre>
+    <img src="preview/zodoscope_homepage.jpg" width="250">  <img src="preview/zodoscope_details.jpg" width="250">
+  </pre>
+</div>
+
+# GIF Preview
+<div align="center">
+  <pre>
+    <img src="preview/zodoscope_preview.gif" width="300">
+  </pre>
+</div>
+
