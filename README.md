@@ -22,7 +22,7 @@ API used: http://horoscope-api.herokuapp.com/
   * Fluid interval preview animation
 * __Network Connectivity Check__ 
   * Stream listening to connectivity status
-  * Error report upon internet connection issues or data retrieval 
+  * Error report upon internet connection issues or data retrieval problems
 
 PS: To navigate from the details screen back to the homescreen, simply swipe the sign down.
 
