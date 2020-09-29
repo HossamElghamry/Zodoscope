@@ -1,7 +1,7 @@
 <h1 align="center">Zodoscope</h1>
 
 <div align="center">
-  <strong>A Horoscope Forcasting Application</strong>
+  <strong>A Horoscope Forecasting Application</strong>
 </div>
 <div align="center">
   Built with Flutter, for Android and iOS
